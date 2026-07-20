@@ -1,0 +1,45 @@
+﻿factor_id;category;module;value;unit;density_kg_l;heating_value_kwh_kg;derived_kgco2e_l;Quelle:
+diesel_wtt;fuel;WTT;71;g CO2e/kWh;0,84;11,65;0,695;
+diesel_ttw;fuel;TTW;254;g CO2e/kWh;0,84;11,65;2,486;
+efuel_wtt_2030_de;fuel;WTT;1,28075;kg CO2e/l;;;1,28075;Labunski et al. (2024), Table A2, p. 13, arithmetic mean of Germany 2030 scenarios 1-8
+gasoline_wtt;fuel;WTT;62;g CO2e/kWh;0,74;11,53;0,529;
+gasoline_ttw;fuel;TTW;274;g CO2e/kWh;0,74;11,53;2,338;
+chainsaw_fuel_mix_wtt_ecoinvent;fuel;WTT;0,783;kg CO2e/l;;;0,783;
+chainsaw_fuel_mix_ttw_ecoinvent;fuel;TTW;1,595;kg CO2e/l;;;1,595;
+chain_oil_wtt;lubricant;WTT;2,99;kg CO2e/l;0,85;;2,99;
+chain_oil_ttw;lubricant;TTW;0;kg CO2e/l;0,85;;0;
+electricity_mix;electricity;WTT;0,31;kg CO2e/kWh;;;;
+rail_infrastructure;transport;production;15;g CO2e/tkm;;;;
+rail_gv_energy_intensity;transport;energy;0,03;kWh/tkm;;;;
+rail_gv_ttw;transport;TTW;1,5;g CO2e/tkm;;;;
+rail_gv_wtt;transport;WTT;2,3;g CO2e/tkm;;;;
+rail_gv_vehicle_production;transport;production;0,2;g CO2e/tkm;;;;
+rail_diesel_share;transport_parameter;operation;0,18;share;;;;
+rail_electric_share;transport_parameter;operation;0,82;share;;;;
+heavy_truck_wtt_tkm;transport;WTT;27,8;g CO2e/tkm;;;;
+heavy_truck_ttw_tkm;transport;TTW;108,3;g CO2e/tkm;;;;
+steel_heavy_plate_a1a3;material_production;production;2,43;kg CO2e/kg;;;;
+semi_trailer_prod_factor;machine_production;production;1,57;kg CO2e/kg;;;;
+li_ion_battery_prod_energy_nick_manganes;battery production;production;74;kg CO2e/kWh;;;;
+li_ion_battery_prod_mass;battery_production;production;17,63;kg CO2e/kg battery;;;;
+li_ion_battery_prod_energy_lagnelov;battery_production;production;155;kg CO2e/kWh;;;;
+ssb_nmc900_prod_energy;battery_production;production;109;kg CO2e/kWh;;;;
+lfp_battery_prod_energy;battery_production;production;64,5;kg CO2e/kWh;;;;Degen et al. (2025), midpoint of 59-70 kg CO2e/kWh for LFP cell production, https://doi.org/10.1111/jiec.13594
+li_ion_nmc_prod_energy_peiseler;battery_production;production;74;kg CO2e/kWh;;;;
+pa6_gf30_prod_factor;material_production;production;5,54;kg CO2e/kg;;;;
+steel_eol_credit;material_eol;EOL;-1,5;kg CO2e/kg recycled material;;;;
+steel_chainsaw_eol_credit;material_eol;EOL;-1,67;kg CO2e/kg recycled steel;;;;
+aluminium_eol_credit;material_eol;EOL;-8,143;kg CO2e/kg recycled material;;;;
+plastics_eol_credit;material_eol;EOL;-1,024;kg CO2e/kg recycled material;;;;
+rubber_eol_credit;material_eol;EOL;-0,671;kg CO2e/kg recycled material;;;;
+glass_eol_credit;material_eol;EOL;-0,314;kg CO2e/kg recycled material;;;;
+copper_eol_credit;material_eol;EOL;-3,577;kg CO2e/kg recycled material;;;;
+brass_eol_credit;material_eol;EOL;-3,577;kg CO2e/kg recycled material;;;;
+lead_eol_credit;material_eol;EOL;-0,435;kg CO2e/kg recycled material;;;;
+li_ion_battery_eol_credit;battery_eol;EOL;-4,5;kg CO2e/kg battery pack;;;;
+ssb_recycling_process_direct_emissions;battery_eol;EOL;0,6458;kg GHG/kg spent battery;;;;
+tractor_eol_recovery_share;machine_eol;EOL;-0,23;share of production emissions;;;;
+plastic_recycling_process_emission;material_eol;EOL;0,32;kg CO2e/kg plastic;;;;
+av_eol_shredding;component_eol;EOL;0,076;kg CO2e/kg;;;;Gawron et al. (2018), end-of-life shredding burden, p. 4
+av_battery_efficiency;operation;use;0,90;share;;;;Gawron et al. (2018), BEV battery discharge-charge efficiency, p. 3
+av_icev_onboard_electric_efficiency;operation;use;0,20;share;;;;Gawron et al. (2018), ICEV alternator electricity conversion efficiency, p. 3

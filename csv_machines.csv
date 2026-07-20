@@ -1,0 +1,36 @@
+﻿machine_id;electric;mass_kg;payload_kg;lifetime_h;lifetime_m3;productivity_m3_h;diesel_l_h;gasoline_mix_l_h;chain_oil_l_h;power_consumption_kwh_h;power_consumption_kwh_m3;battery_capacity_kwh;engine_mass_ICE_kg;battery_mass_kg;number_of_batteries_over_lifetime;production_factor_kgco2e_kg;repair_factor;wagon_lifetime_years;wagon_km_per_year;relocation_distance;operating_hours_per_day;ttw_zero;production_model;load_volume_m3;autonomy_subsystem_mass_kg;autonomy_subsystem_power_w;autonomy_subsystem_production_kgco2e;autonomy_subsystem_eol_kgco2e_kg;autonomy_productivity_gain_share;autonomy_energy_saving_share;autonomy_onboard_electric_efficiency;cab_removed_mass_kg;autonomy_source
+rail;FALSE;24900;64200;;;;;;;;;;;;;2,43;;40;100000;;;FALSE;1;;;;;;;;;;
+harvester_diesel;FALSE;22000;;17600;;27;22,08;;;;;;;;;3,49;0,52;;;;;FALSE;0;;;;;;;;;;
+harvester_electric;TRUE;22000;;17600;;27;0;;;107,3534;;283,5;;1771,875;2;3,49;0,52;;;25;8;TRUE;2;;;;;;;;;;
+forwarder_diesel;FALSE;11322;;17600;221,232;12,57;12,2;;;;;;;;;3,692722;0,52;;;25;8;FALSE;0;;;;;;;;;;
+forwarder_electric;TRUE;11322;;17600;;12,57;0;;;59,3164;;189;700;1181,25;2;3,69;0,52;;;25;8;TRUE;2;;;;;;;;;;
+forwarder_pully;FALSE;3950;3200;17600;;4,19;10,24;;;;;;;;;3,692722;0,52;;;25;8;FALSE;0;4;;;;;;;;;
+tractor_diesel_winch;FALSE;3600;;10000;;4,96;2,49;;;;;;;;;4,2;;;;;;FALSE;0;;;;;;;;;;
+tractor_diesel_trailer;FALSE;3600;;10000;;;;;;;;;495;;;4,2;;;;;;FALSE;0;9;;;;;;;;;
+tractor_electric_winch;TRUE;3964;;10000;;4,96;0;;;11,9119;;195;495;1227,5;1;4,2;;;;;;TRUE;2;;;;;;;;;;
+tractor_electric_trailer;TRUE;3964;;10000;;;0;;;;;195;495;1227,5;1;4,2;;;;;;TRUE;2;9;;;;;;;;;
+forest_winch;FALSE;759;;34274;170000;4,96;2,49488;;;;;;;;;2,43;;;;;;TRUE;0;;;;;;;;;;
+chainsaw_petrol;FALSE;7;;2500;13650;5,46;;0,97;0,39;;;;;;;26,92;;;;;;FALSE;0;;;;;;;;;;
+chainsaw_electric;TRUE;6;;800;4368;5,46;0;;0,39;;0,2629;0,54;;1,9;2;26,92;;;;;;TRUE;3;;;;;;;;;;
+forest_trailer;FALSE;3855;15145;15000;;11,1;3,12;;;;;;;;;1,57;;;;;;TRUE;4;9;;;;;;;;;
+cable_yarder_diesel;FALSE;31000;;20000;;13;35,3;;;;;;;;;;;;;;;FALSE;5;;;;;;;;;;
+cable_yarder_recuperating;FALSE;30670;;20000;;13;35,3;;;;;3;0;3;1;;;;;;;FALSE;8;;;;;;;;;;
+cable_yarder_electric;TRUE;31000;;20000;;13;0;;;171,6286;;624;0;2310;2;3,49;0,52;;;;;TRUE;8;;;;;;;;;;
+truck_diesel;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;FALSE;0;25,6;;;;;;;;;
+truck_diesel_intermodal_container;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;FALSE;0;;;;;;;;;;
+truck_efuel;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;TRUE;0;25,6;;;;;;;;;
+truck_bev;TRUE;10200;23000;35200;;10,99;0;;;230;;624;0;2310;2;3,49;0,52;;;;;TRUE;6;25,6;;;;;;;;;
+truck_trailer;FALSE;10800;;12600;;12,56;;;;;;;;;;1,57;0;;;;;TRUE;7;12,8;;;;;;;;;
+intermodal_container;FALSE;2500;;;56187,5;;;;;;;;;;;;0,1;;;;;TRUE;9;22,475;;;;;;;;;
+rail_intermodal_container;FALSE;24900;64200;;;;;;;;;;;;;2,43;;40;100000;;;FALSE;1;;;;;;;;;;
+terminal_handling_logs;FALSE;0;;;;;;;;;;;;;;;0;;;;;FALSE;0;25,6;;;;;;;;;
+terminal_handling_intermodal_container;FALSE;0;;;;;;;;;;;;;;;0;;;;;FALSE;0;;;;;;;;;;
+harvester_autonomous_low_diesel;FALSE;22000;;17600;;27;22,08;;;;;;;;;3,49;0,52;;;;;FALSE;0;;16,7;222;367;0,076;0;0;0,2;0;Gawron 2018 small CAV kit Table 1-2 p.2-3 and subsystem totals p.5
+harvester_autonomous_partly_diesel;FALSE;22000;;17600;;27;22,08;;;;;;;;;3,49;0,52;;;;;FALSE;0;;22,4;240;450,43;0,076;0,02;0;0,2;0;Gawron 2018 medium kit and Nguyen Hirz 2025 Table 2 p.4 productivity assumption
+harvester_autonomous_high_diesel;FALSE;22000;;17600;;27;22,08;;;;;;;;;3,49;0,52;;;;;FALSE;0;;55,4;327;822;0,076;0,05;0;0,2;500;Gawron 2018 large CAV kit p.5 cab removal model assumption
+forwarder_autonomous_low_diesel;FALSE;28000;;17600;;12,57;12,2;;;;;;;;;3,692722;0,52;;;25;8;FALSE;0;;16,7;222;367;0,076;0,03;0;0,2;0;Konrad T-SKIDDER TS20-1 28000 kg and Gawron 2018 small kit productivity assumption
+forwarder_autonomous_partly_diesel;FALSE;28000;;17600;;12,57;12,2;;;;;;;;;3,692722;0,52;;;25;8;FALSE;0;;22,4;240;450,43;0,076;0,06;0;0,2;0;Konrad T-SKIDDER TS20-1 28000 kg and Nguyen Hirz 2025 medium kit productivity assumption
+forwarder_autonomous_high_diesel;FALSE;28000;;17600;;12,57;12,2;;;;;;;;;3,692722;0,52;;;25;8;FALSE;0;;55,4;327;822;0,076;0,1;0;0,2;500;Konrad T-SKIDDER TS20-1 28000 kg and Gawron 2018 large kit cab removal assumption
+truck_autonomous_low_diesel;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;FALSE;0;25,6;16,7;222;367;0,076;0;0,05;0,2;0;Gawron 2018 direct CAV effect lower bound 5 percent p.6
+truck_autonomous_partly_diesel;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;FALSE;0;25,6;22,4;240;450,43;0,076;0;0,14;0,2;0;Gawron 2018 average direct CAV effect 14 percent p.6 Nguyen Hirz 2025 Table 3 p.5
+truck_autonomous_high_diesel;FALSE;8000;25200;35200;;10,99;70;;;;;;;;;3,49;0,52;;;;;FALSE;0;25,6;55,4;327;822;0,076;0;0,22;0,2;500;Gawron 2018 direct CAV effect upper bound 22 percent p.6 cab removal model assumption

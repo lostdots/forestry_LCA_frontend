@@ -1,0 +1,61 @@
+﻿machine_id;component;material_id;material_name;mass_kg;share_percent;production_factor_id;eol_factor_id;recycling_rate
+harvester_diesel;machine_body;steel;Steel total;20450;93;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+harvester_diesel;tyres;rubber;Rubber/tyres;1032;4,7;;rubber_eol_credit;0,9
+harvester_diesel;machine_body;plastics;Plastics;230;1;;plastics_eol_credit;0,9
+harvester_diesel;machine_body;aluminium;Aluminium;173;0,8;;aluminium_eol_credit;0,9
+harvester_diesel;cabin;glass;Glass;72;0,3;;glass_eol_credit;0,9
+harvester_diesel;electrical;copper;Copper;43;0,2;;copper_eol_credit;0,9
+forwarder_diesel;machine_body;steel;Steel;9247;82;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+forwarder_diesel;machine_body;aluminium;Aluminium;81,5;0,7;;aluminium_eol_credit;0,9
+forwarder_diesel;machine_body;plastics;Plastics;345,5;3,1;;plastics_eol_credit;0,9
+forwarder_diesel;tyres;rubber;Rubber;1360,5;11,6;;rubber_eol_credit;0,9
+forwarder_diesel;electrical;copper;Copper;121,5;1,1;;copper_eol_credit;0,9
+forwarder_diesel;machine_body;brass;Brass;96;0,8;;brass_eol_credit;0,9
+forwarder_diesel;cabin;glass;Glass;40;0,4;;glass_eol_credit;0,9
+forwarder_diesel;battery_or_electrical;lead;Lead;30;0,3;;lead_eol_credit;0,9
+forwarder_electric;machine_body;steel;Steel;8407,403;82;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+forwarder_electric;machine_body;aluminium;Aluminium;74,1;0,7;;aluminium_eol_credit;0,9
+forwarder_electric;machine_body;plastics;Plastics;314,13;3,1;;plastics_eol_credit;0,9
+forwarder_electric;tyres;rubber;Rubber;1236,971;11,6;;rubber_eol_credit;0,9
+forwarder_electric;electrical;copper;Copper;110,468;1,1;;copper_eol_credit;0,9
+forwarder_electric;machine_body;brass;Brass;87,284;0,8;;brass_eol_credit;0,9
+forwarder_electric;cabin;glass;Glass;36,368;0,4;;glass_eol_credit;0,9
+forwarder_electric;battery_or_electrical;lead;Lead;27,276;0,3;;lead_eol_credit;0,9
+forwarder_electric;battery;lfp_battery_pack;LFP battery pack;1181,25;;lfp_battery_prod_energy;li_ion_battery_eol_credit;
+harvester_electric;battery;lfp_battery_pack;LFP battery pack;1771,875;;lfp_battery_prod_energy;li_ion_battery_eol_credit;
+rail_rnoos_wagon;wagon_body;steel;Steel/heavy plate proxy;24900;100;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+forest_winch;winch;steel;Steel winch body;684;90,1;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+forest_winch;wire_rope;steel;Steel wire rope;75;9,9;steel_heavy_plate_a1a3;steel_eol_credit;0,9
+tractor_electric;body_without_engine;mixed_tractor_body;Tractor body without engine;3469;;tractor_body_production_factor;tractor_eol_recovery_share;
+tractor_electric;battery;li_ion_battery_pack;Lithium-ion battery pack;1227,5;;li_ion_battery_prod_mass;li_ion_battery_eol_credit;
+tractor_diesel;body;mixed_tractor_body;Conventional tractor body;3600;;tractor_body_production_factor;tractor_eol_recovery_share;
+chainsaw_petrol;saw_body;unalloyed_steel;Unalloyed steel;5,4;77,1;;steel_chainsaw_eol_credit;0,9
+chainsaw_petrol;chain_and_bar;high_alloy_steel;High-alloy steel;1,6;22,9;;steel_chainsaw_eol_credit;0,9
+chainsaw_electric;saw_body;pa6_gf30;PA6 GF30 body proxy;4,1;;pa6_gf30_prod_factor;plastic_recycling_process_emission;
+chainsaw_electric;batteries_over_lifetime;li_ion_battery_pack;Lithium-ion battery packs over saw lifetime;4,047;;li_ion_nmc_prod_energy_peiseler;li_ion_battery_eol_credit;
+chainsaw_electric;charger;charger_mixed;Battery charger;1;;tractor_body_production_factor;;
+forest_trailer_loader_crane;trailer_and_crane;steel;Steel share assumption;3469,5;90;semi_trailer_prod_factor;steel_eol_credit;0,85
+forest_trailer_loader_crane;trailer_and_crane;other_materials;Other materials;385,5;10;;;
+cable_yarder_diesel;machine_body;aluminium_alloy;Aluminium alloy;578;;;aluminium_eol_credit;0,9
+cable_yarder_diesel;machine_body;cast_iron;Cast iron;6680;;;steel_eol_credit;0,9
+cable_yarder_diesel;machine_body;chromium_steel;Chromium steel;1700;;;steel_eol_credit;0,9
+cable_yarder_diesel;electrical;copper;Copper;51;;;copper_eol_credit;0,9
+cable_yarder_diesel;electrical;electronics;Electronics;115;;;;
+cable_yarder_diesel;cabin;flat_glass;Flat glass;233;;;glass_eol_credit;0,9
+cable_yarder_diesel;machine_body;low_alloy_steel_1;Low-alloy steel 1;18300;;;steel_eol_credit;0,9
+cable_yarder_diesel;machine_body;low_alloy_steel_2;Low-alloy steel 2;16100;;;steel_eol_credit;0,9
+cable_yarder_diesel;tyres;synthetic_rubber;Synthetic rubber;2200;;;rubber_eol_credit;0,9
+cable_yarder_diesel;machine_body;polypropylene;Polypropylene;1020;;;plastics_eol_credit;0,9
+cable_yarder_diesel;battery_or_electrical;lead;Lead;295;;;lead_eol_credit;0,9
+cable_yarder_diesel;wire_rope;wire_drawing_steel;Wire drawing steel;4010;;;steel_eol_credit;0,9
+cable_yarder_diesel;wire_rope;wire_drawing_copper;Wire drawing copper;51;;;copper_eol_credit;0,9
+cable_yarder_recuperating;battery;supercapacitor_pack;Supercapacitor pack;3;;lfp_battery_prod_energy;li_ion_battery_eol_credit;
+cable_yarder_electric;battery;lfp_battery_pack;LFP battery pack;2310;;lfp_battery_prod_energy;li_ion_battery_eol_credit;
+truck_diesel;machine_body;steel;Steel share assumption;16920;90;steel_heavy_plate_a1a3;steel_eol_credit;0,85
+truck_diesel;machine_body;other_materials;Other materials;1880;10;;;
+truck_bev;machine_body;steel;Steel share assumption;16920;90;steel_heavy_plate_a1a3;steel_eol_credit;0,85
+truck_bev;machine_body;other_materials;Other materials;1880;10;;;
+truck_bev;battery;lfp_battery_pack;LFP battery pack;2500;;lfp_battery_prod_energy;li_ion_battery_eol_credit;
+truck_trailer;trailer_body;steel;Steel share assumption;14288,4;90;semi_trailer_prod_factor;steel_eol_credit;0,85
+truck_trailer;trailer_body;other_materials;Other materials;1587,6;10;;;
+intermodal_container;container_body;steel;Steel ACTS timber container proxy;2500;100;steel_heavy_plate_a1a3;steel_eol_credit;0,85

@@ -1,0 +1,35 @@
+﻿group;variant;pathway_id;use_case;winching_distance;extraction_to_log_pile;forest_distance_km;street_distance_km;forest_road_gradient_percent;stand_to_logpile_m;road_to_logpile_m;direct_road_logpile_to_plant_km;logpile_to_rail_terminal_km;rail_km;rail_terminal_to_plant_km;terminal_handling_time_reduction_share;empty_return_reduction_share
+Motor-manual harvesting;Electrified;MMH-E;short_distance;20;40;1;4;3;;;5;;;;;
+Motor-manual harvesting;Conventional;MMH-MC;short_distance;20;40;1;4;3;;;5;;;;;
+Partially automated harvesting;Electrified;PAH-E;short_distance;;;2;48;3;100;;50;;;;;
+Partially automated harvesting;Conventional;PAH-C;short_distance;;;2;48;3;100;;50;;;;;
+Partially automated harvesting;Innovative;PAH-I;short_distance;;;2;48;3;100;;50;;;;;
+Harvesting in steep terrain;Electrified;HST-E;short_distance;;;2;13;9;150;;;15;100;;;
+Harvesting in steep terrain;Conventional;HST-C;short_distance;;;2;13;9;150;;;15;100;5;;
+Harvesting in steep terrain;Innovative;HST-I;short_distance;;;2;13;9;150;;;15;100;;0,66;0,45
+Autonomous pathway;Low autonomy;AP-L;short_distance;;;2;48;3;40;;50;;;;;
+Autonomous pathway;Partly autonomous;AP-P;short_distance;;;2;48;3;40;;50;;;;;
+Autonomous pathway;High autonomy;AP-H;short_distance;;;2;48;3;40;;50;;;;;
+Motor-manual harvesting;Electrified;MMH-E;average_distance;40;90;3;7;5;;;10;;;;;
+Motor-manual harvesting;Conventional;MMH-MC;average_distance;40;90;3;7;5;;;10;;;;;
+Partially automated harvesting;Electrified;PAH-E;average_distance;;;3;97;5;300;;100;;;;;
+Partially automated harvesting;Conventional;PAH-C;average_distance;;;3;97;5;300;;100;;;;;
+Partially automated harvesting;Innovative;PAH-I;average_distance;;;3;97;5;300;;100;;;;;
+Harvesting in steep terrain;Electrified;HST-E;average_distance;;;3;22;9;250;;;25;200;;;
+Harvesting in steep terrain;Conventional;HST-C;average_distance;;;3;22;9;250;;;25;200;10;;
+Harvesting in steep terrain;Innovative;HST-I;average_distance;;;3;22;9;250;;;25;200;;0,66;0,45
+Autonomous pathway;Low autonomy;AP-L;average_distance;;;3;97;5;90;;100;;;;;
+Autonomous pathway;Partly autonomous;AP-P;average_distance;;;3;97;5;90;;100;;;;;
+Autonomous pathway;High autonomy;AP-H;average_distance;;;3;97;5;90;;100;;;;;
+Motor-manual harvesting;Electrified;MMH-E;long_distance;80;150;5;10;7;;;15;;;;;
+Motor-manual harvesting;Conventional;MMH-MC;long_distance;80;150;5;10;7;;;15;;;;;
+Partially automated harvesting;Electrified;PAH-E;long_distance;;;5;145;7;600;;150;;;;;
+Partially automated harvesting;Conventional;PAH-C;long_distance;;;5;145;7;600;;150;;;;;
+Partially automated harvesting;Innovative;PAH-I;long_distance;;;5;145;7;600;;150;;;;;
+Harvesting in steep terrain;Electrified;HST-E;long_distance;;;5;30;9;600;;;35;400;;;
+Harvesting in steep terrain;Conventional;HST-C;long_distance;;;5;30;9;600;;;35;400;15;;
+Harvesting in steep terrain;Innovative;HST-I;long_distance;;;5;30;9;600;;;35;400;;0,66;0,45
+Autonomous pathway;Low autonomy;AP-L;long_distance;;;5;145;7;200;;150;;;;;
+Autonomous pathway;Partly autonomous;AP-P;long_distance;;;5;145;7;200;;150;;;;;
+Autonomous pathway;High autonomy;AP-H;long_distance;;;5;145;7;200;;150;;;;;
+
