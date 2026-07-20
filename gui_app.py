@@ -28,7 +28,7 @@ from helper_functions import DataStream, run_pathway
 from pathways import TRANSPORT_PATHWAY_GROUPS
 
 ROOT = Path(__file__).parent
-IMAGE_ROOT = ROOT.parent.parent / "Bilder"
+IMAGE_ROOT = ROOT
 CREATOR_IMAGES = {
     "felling": IMAGE_ROOT / "Bild_Axt_am_Stock.png",
     "extraction": IMAGE_ROOT / "Bild_Forwarding.png",
