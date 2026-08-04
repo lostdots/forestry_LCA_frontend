@@ -28,7 +28,7 @@ from helper_functions import DataStream, run_pathway
 from pathways import TRANSPORT_PATHWAY_GROUPS
 
 ROOT = Path(__file__).parent
-IMAGE_ROOT = ROOT
+IMAGE_ROOT = ROOT.parent.parent / "Bilder"
 CREATOR_IMAGES = {
     "felling": IMAGE_ROOT / "Bild_Axt_am_Stock.png",
     "extraction": IMAGE_ROOT / "Bild_Forwarding.png",
@@ -138,7 +138,7 @@ TRANSPORT_OPTIONS = {
         "e-fuel": ["truck_efuel", "truck_trailer"],
         "Intermodal": [
             "truck_diesel_intermodal_container",
-            "truck_trailer",
+            "truck_trailer_intermodal_container",
             "intermodal_container",
         ],
     },
@@ -182,6 +182,7 @@ MACHINE_CATEGORIES = {
     "Rail": {"Logs": "rail", "Intermodal": "rail_intermodal_container"},
     "Trailer / attachment": {
         "Truck trailer": "truck_trailer",
+        "Intermodal truck trailer": "truck_trailer_intermodal_container",
         "Forest trailer": "forest_trailer",
         "Forest winch": "forest_winch",
         "Intermodal container": "intermodal_container",
@@ -209,7 +210,7 @@ FIELD_LABELS = {
     "battery_mass_kg": "Batteriemasse [kg]",
     "number_of_batteries_over_lifetime": "Batterien über Lebensdauer",
     "production_factor_kgco2e_kg": "Produktionsfaktor [kg CO₂e/kg]",
-    "repair_factor": "Reparaturfaktor",
+    "maintenance_factor_percentage": "Maintenance-Anteil [0-1]",
     "wagon_lifetime_years": "Waggon-Lebensdauer [Jahre]",
     "wagon_km_per_year": "Waggon-Fahrleistung [km/Jahr]",
     "relocation_distance": "Umsetzdistanz [km]",
@@ -1175,12 +1176,43 @@ def standard_scenario():
     stacked_chart(role_data, "variant", selected_role)
 
 
+def synchronize_intermodal_machine_rows(
+    data: pd.DataFrame,
+) -> tuple[float, float, float]:
+    base_row = data[data["machine_id"] == "truck_diesel"].iloc[0]
+    container_row = data[data["machine_id"] == "intermodal_container"].iloc[0]
+    base_volume = float(base_row["load_volume_m3"])
+    container_mass = float(container_row["mass_kg"])
+    load_volume = machines.IntermodalContainer.calculate_timber_load_volume_m3(
+        base_volume,
+        container_mass,
+    )
+    intermodal_machine_ids = {
+        "truck_diesel_intermodal_container",
+        "truck_trailer_intermodal_container",
+        "rail_intermodal_container",
+        "terminal_handling_intermodal_container",
+        "intermodal_container",
+    }
+    intermodal_rows = data["machine_id"].isin(intermodal_machine_ids)
+    data.loc[intermodal_rows, "load_volume_m3"] = load_volume
+    data.loc[intermodal_rows, "container_weight_kg"] = container_mass
+    container_rows = data["machine_id"] == "intermodal_container"
+    data.loc[container_rows, "lifetime_m3"] = (
+        load_volume * machines.IntermodalContainer.LIFETIME_CYCLES
+    )
+    return base_volume, container_mass, load_volume
+
+
 def machines_editor():
     st.title("Anpassung Machines")
     st.caption(
         "Maschine, Untertyp und Szenario auswählen; Änderungen bleiben zunächst in der temporären CSV."
     )
     data = read_csv("csv_machines.csv")
+    base_volume, container_mass, derived_volume = (
+        synchronize_intermodal_machine_rows(data)
+    )
 
     category = st.selectbox(
         "Maschine", list(MACHINE_CATEGORIES), key="machine_editor_category"
@@ -1196,8 +1228,39 @@ def machines_editor():
     index = data.index[data["machine_id"] == machine_id][0]
     row = data.loc[index]
     st.subheader(machine_id.replace("_", " ").title())
+    locked_fields = {"machine_id"}
+    if machine_id == "truck_diesel":
+        st.caption(
+            "Dieses Ladevolumen ist das Basisladevolumen ohne intermodalen "
+            "Container."
+        )
+    if machine_id in {
+        "truck_diesel_intermodal_container",
+        "truck_trailer_intermodal_container",
+        "rail_intermodal_container",
+        "intermodal_container",
+    }:
+        st.info(
+            "Das intermodale Holzladevolumen wird automatisch berechnet: "
+            f"{base_volume:.3f} m³ Basisvolumen − "
+            f"({container_mass:.0f} kg Container − 552 kg Rungen) / "
+            f"960 kg/m³ = {derived_volume:.3f} m³."
+        )
+        locked_fields.add("load_volume_m3")
+        locked_fields.add("container_weight_kg")
+        if machine_id == "intermodal_container":
+            locked_fields.add("lifetime_m3")
+            st.caption(
+                "Die Lebensleistung wird dynamisch aus 2.500 Containerzyklen "
+                "und dem berechneten Ladevolumen bestimmt."
+            )
+    if machine_id == "truck_trailer":
+        st.caption(
+            "Dieses Ladevolumen gilt für konventionelle LKW-Pfade. Im "
+            "intermodalen Pfad wird das berechnete Container-Ladevolumen verwendet."
+        )
     with st.form("machine_form"):
-        updates = editable_fields(row, f"machine_{machine_id}", {"machine_id"})
+        updates = editable_fields(row, f"machine_{machine_id}", locked_fields)
         submit_col, overwrite_col, _ = st.columns([0.20, 0.24, 0.56], gap="small")
         submitted = submit_col.form_submit_button(
             "Änderungen übernehmen", type="primary"
@@ -1208,6 +1271,7 @@ def machines_editor():
     if submitted or overwrite_submitted:
         for field, value in updates.items():
             data.at[index, field] = value
+        synchronize_intermodal_machine_rows(data)
         write_csv(data, "csv_machines.csv")
         if overwrite_submitted:
             overwrite_original_csv("csv_machines.csv")

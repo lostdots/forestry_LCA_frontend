@@ -54,7 +54,7 @@
         "chainsaw_electric",
         "cable_yarder_recuperating",
         "truck_diesel_intermodal_container",
-        "truck_trailer",
+        "truck_trailer_intermodal_container",
         "rail_intermodal_container",
         "terminal_handling_intermodal_container",
         "intermodal_container",
