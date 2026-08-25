@@ -361,9 +361,11 @@ def _create_machine_from_row(machine_object):
         machine_args["load_volume_m3"] = machine_object.get("load_volume_m3", 0)
         machine_args["container_weight_kg"] = machine_object.get("container_weight_kg", 0)
 
-    if cls == Forwarder:
+    if cls in {Forwarder, Harvester}:
         machine_args["relocation_distance"] = machine_object["relocation_distance"]
         machine_args["operating_hours_per_day"] = machine_object["operating_hours_per_day"]
+
+    if cls == Forwarder:
         machine_args["payload_kg"] = machine_object["payload_kg"]
         machine_args["load_volume_m3"] = machine_object["load_volume_m3"]
 

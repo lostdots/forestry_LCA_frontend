@@ -19,10 +19,12 @@ import streamlit as st
 import helper_functions
 import machines
 import pathways
+import sensitivity_analysis
 
 importlib.reload(machines)
 importlib.reload(helper_functions)
 importlib.reload(pathways)
+importlib.reload(sensitivity_analysis)
 
 from helper_functions import DataStream, run_pathway
 from pathways import TRANSPORT_PATHWAY_GROUPS
@@ -845,6 +847,16 @@ def calculate() -> tuple[pd.DataFrame, pd.DataFrame]:
     pathway_df = pd.DataFrame(results)
     machine_df = pd.DataFrame(machines)
     return pathway_df, machine_df
+
+
+def sensitivity_analysis_page():
+    apply_custom_pathways()
+    sensitivity_analysis.show_sensitivity_analysis_page(
+        data_folder=session_dir(),
+        pathway_groups=active_pathway_groups(),
+        group_labels=GROUP_LABELS,
+        use_case_labels=USE_CASE_LABELS,
+    )
 
 
 def phase_metrics(row: pd.Series | None):
@@ -1831,6 +1843,7 @@ def main():
             [
                 "Pathway Creator",
                 "Standard-Szenarien",
+                "Sensitivity Analysis",
                 "Anpassung Use Cases",
                 "Anpassung Machines",
                 "Anpassung Emissionsfaktoren",
@@ -1847,6 +1860,7 @@ def main():
 
     pages = {
         "Standard-Szenarien": standard_scenario,
+        "Sensitivity Analysis": sensitivity_analysis_page,
         "Pathway Creator": pathway_creator,
         "Anpassung Use Cases": use_cases_editor,
         "Anpassung Machines": machines_editor,

@@ -5,6 +5,7 @@ from helper_functions import (
 )
 
 import pandas as pd
+from sensitivity_analysis import save_sensitivity_analysis
 
 
 def main():
@@ -37,6 +38,10 @@ def main():
     plot_use_case_diagrams(
         results_df,
         machine_results_df,
+        output_dir="use_cases_results",
+    )
+    save_sensitivity_analysis(
+        stream,
         output_dir="use_cases_results",
     )
 

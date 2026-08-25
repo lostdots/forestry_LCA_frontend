@@ -54,6 +54,8 @@ class Machine:
         autonomy_energy_saving_share=0,
         autonomy_onboard_electric_efficiency=0.20,
         cab_removed_mass_kg=0,
+        relocation_distance=0,
+        operating_hours_per_day=0,
     ):
 
         self.machine_id = machine_id
@@ -90,6 +92,8 @@ class Machine:
         self.autonomy_energy_saving_share = _bounded_share(autonomy_energy_saving_share)
         self.autonomy_onboard_electric_efficiency = _to_float(autonomy_onboard_electric_efficiency, default=0.20)
         self.cab_removed_mass_kg = _to_float(cab_removed_mass_kg)
+        self.relocation_distance = _to_float(relocation_distance)
+        self.operating_hours_per_day = _to_float(operating_hours_per_day)
         self._autonomy_adjustments_applied = False
 
     def _net_base_mass_kg(self):
@@ -97,6 +101,37 @@ class Machine:
 
     def _effective_mass_kg(self):
         return self._net_base_mass_kg() + self.autonomy_subsystem_mass_kg
+
+    def _calculate_relocation_emission(self, emission_factors: dict, mode: str):
+        """Return machine-relocation emissions in kg CO2e per harvested m3."""
+        if (
+            self.relocation_distance <= 0
+            or self.operating_hours_per_day <= 0
+            or self.productivity_h <= 0
+        ):
+            return 0.0
+
+        factor_ids = {
+            "wtt": "heavy_truck_wtt_tkm",
+            "ttw": "heavy_truck_ttw_tkm",
+        }
+        factor_id = factor_ids.get(mode)
+        if factor_id is None:
+            return 0.0
+
+        # Repository factors are g CO2e/tkm; model results use kg CO2e/m3.
+        truck_factor_kgco2e_tkm = _factor(emission_factors, factor_id) / 1000
+        machine_mass_t = self._effective_mass_kg() / 1000
+        tkm_per_operating_hour = (
+            machine_mass_t
+            * self.relocation_distance
+            / self.operating_hours_per_day
+        )
+        return (
+            tkm_per_operating_hour
+            * truck_factor_kgco2e_tkm
+            / self.productivity_h
+        )
 
     def _autonomy_production_total(self):
         return self.autonomy_subsystem_production_kgco2e
@@ -402,31 +437,23 @@ class Forwarder(Machine):
         diesel_heating_value = _factor(emission_factors, "diesel_wtt_heating_value")
         diesel_wtt = _factor(emission_factors, "diesel_wtt")
         diesel_ttw = _factor(emission_factors, "diesel_ttw")
-        heavy_truck_wtt = _factor(emission_factors, "heavy_truck_wtt_tkm") / 1000
-        heavy_truck_ttw = _factor(emission_factors, "heavy_truck_ttw_tkm") / 1000
-
         emission = 0
-        truck_factor = 0
         match self.electric:
             case True:
                 if mode == "wtt":
                     self._recalculate_power_consumption_kwh_m3()
                     emission = self.power_consumption_kwh_m3 * electricity_mix
-                    truck_factor = heavy_truck_wtt  # kg CO2e / tkm
                 elif mode == "ttw":
                     emission = 0
-                    truck_factor = heavy_truck_ttw  # kg CO2e / tkm
             case False:
                 density = diesel_density
                 heat_capacity = diesel_heating_value
 
                 if mode == "wtt":
                     emission_factor = diesel_wtt
-                    truck_factor = heavy_truck_wtt  # kg CO2e / tkm
 
                 elif mode == "ttw":
                     emission_factor = diesel_ttw
-                    truck_factor = heavy_truck_ttw  # kg CO2e / tkm
 
                 emission = super().calculate_emission(
                     self.diesel_l_h,
@@ -435,12 +462,7 @@ class Forwarder(Machine):
                     emission_factor,
                 )
 
-        # Ueberstellung
-        machine_mass_t = self._effective_mass_kg() / 1000
-
-        tkm_per_operating_hour = (machine_mass_t * self.relocation_distance) / self.operating_hours_per_day
-
-        relocation = (tkm_per_operating_hour * truck_factor) / self.productivity_h
+        relocation = self._calculate_relocation_emission(emission_factors, mode)
 
         if mode == "wtt":
             self.wtt_emission = emission + relocation
@@ -488,10 +510,13 @@ class Tractor(Machine):
 
     def calculate_maintenance_emissions(self, materials: list[dict], emission_factors: dict):
         if self.electric:
-            emission_housing = (self.mass_kg - self.engine_mass_ICE_kg) * self.production_factor
+            maintenance_housing = (
+                (self.mass_kg - self.engine_mass_ICE_kg)
+                * self.maintenance_factor
+            )
             replacement_batteries = max(self.number_of_batteries_over_lifetime - 1.0, 0.0)
             emission_battery = self.battery_mass * _factor(emission_factors, "li_ion_battery_prod_mass") * replacement_batteries
-            maintenance_total = emission_housing * self.maintenance_factor_percentage + emission_battery
+            maintenance_total = maintenance_housing + emission_battery
             self.maintenance_emission = self._divide_by_production_output(maintenance_total)
             return
 
@@ -663,9 +688,7 @@ class Harvester(Machine):
         diesel_ttw = _factor(emission_factors, "diesel_ttw")
 
         emission = 0
-        emission_machine_transport_wtt = 0
         emission_chain_oil_wtt = 0
-        emission_machine_transport_ttw = 0
         match self.electric:
             case True:
                 if mode == "wtt":
@@ -679,11 +702,9 @@ class Harvester(Machine):
 
                 if mode == "wtt":
                     emission_factor = diesel_wtt
-                    emission_machine_transport_wtt = 0.095
                     emission_chain_oil_wtt = 0.0818
                 elif mode == "ttw":
                     emission_factor = diesel_ttw
-                    emission_machine_transport_ttw = 0.245
 
                 emission = super().calculate_emission(
                     self.diesel_l_h,
@@ -692,10 +713,12 @@ class Harvester(Machine):
                     emission_factor,
                 )
 
+        relocation = self._calculate_relocation_emission(emission_factors, mode)
+
         if mode == "wtt":
-            self.wtt_emission = emission + emission_machine_transport_wtt + emission_chain_oil_wtt
+            self.wtt_emission = emission + relocation + emission_chain_oil_wtt
         elif mode == "ttw":
-            self.ttw_emission = emission + emission_machine_transport_ttw
+            self.ttw_emission = emission + relocation
 
 
 class Chainsaw(Machine):
@@ -713,7 +736,7 @@ class Chainsaw(Machine):
 
         body_rows = [row for row in materials if row["machine_id"] == self.machine_id and row.get("component") == "saw_body"]
         body_total = sum(self._calculate_eol_row(row, emission_factors) for row in body_rows)
-        battery_total = self.battery_capacity * self.number_of_batteries_over_lifetime * _factor(emission_factors, "chainsaw_battery_recycling_burden")
+        battery_total = self.battery_capacity * self.number_of_batteries_over_lifetime * _factor(emission_factors, "chainsaw_battery_recycling_credit")
         self.eol_emission = (body_total + battery_total) / self._lifetime_output_m3()
 
     def calculate_production_emissions(self, materials: list[dict], emission_factors: dict):

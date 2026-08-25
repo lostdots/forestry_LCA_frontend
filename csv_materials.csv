@@ -37,7 +37,7 @@ tractor_electric;battery;li_ion_battery_pack;Lithium-ion battery pack;1227,5;;li
 tractor_diesel;body;mixed_tractor_body;Conventional tractor body;3600;;tractor_body_production_factor;tractor_eol_recovery_share;
 chainsaw_petrol;saw_body;unalloyed_steel;Unalloyed steel;5,4;77,1;;steel_chainsaw_eol_credit;0,9
 chainsaw_petrol;chain_and_bar;high_alloy_steel;High-alloy steel;1,6;22,9;;steel_chainsaw_eol_credit;0,9
-chainsaw_electric;saw_body;pa6_gf30;PA6 GF30 body proxy;4,1;;pa6_gf30_prod_factor;plastic_recycling_process_emission;
+chainsaw_electric;saw_body;pa6_gf30;PA6 GF30 body proxy;4,1;;pa6_gf30_prod_factor;plastics_eol_credit;
 chainsaw_electric;batteries_over_lifetime;li_ion_battery_pack;Lithium-ion battery packs over saw lifetime;3,8;;li_ion_nmc_prod_energy_peiseler;;
 chainsaw_electric;charger;charger_mixed;Battery charger;1;;tractor_body_production_factor;;
 forest_trailer_loader_crane;trailer_and_crane;steel;Steel share assumption;3469,5;90;semi_trailer_prod_factor;steel_eol_credit;0,85
